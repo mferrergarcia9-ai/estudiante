@@ -111,13 +111,8 @@ Diccionario<T,U> Diccionario<T,U>::union_d(const Diccionario &D){
     Diccionario<T,U> res(*this); //aqui creamos una copia del diccionario para no estropear el original
     for(typename list<data<T,U> >::const_iterator itD = D.datos.begin(); itD != D.datos.end(); ++itD){  //recorre ficha por ficha el diccionario D
         typename Diccionario<T,U>::iterator pos;
-        /*if(res.Esta_Clave(itD->clave, pos)){ //miramos si la clave de la ficha que etsmos buscando esta ya en res, si existe pos apunta ella sino al hueco donde debria estar
-            pos->info_asoci.insert(pos->info_asoci.end(), itD->info_asoci.begin(), itD->info_asoci.end()); //si ya esta junatmos las informaciones 
-        } else {
-            res.datos.insert(pos.it, *itD);
-        }*/
-    }
-    return res;
+     
+   
 
 }
 
