@@ -108,9 +108,10 @@ bool  Diccionario<T,U>::Borrar(const T & c){
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::union_d(const Diccionario &D){
+    typename Diccionario<T,U>::iterator it;
     Diccionario<T,U> res(*this); //aqui creamos una copia del diccionario para no estropear el original
     for(typename list<data<T,U> >::const_iterator itD = D.datos.begin(); itD != D.datos.end(); ++itD){  //recorre ficha por ficha el diccionario D
-        typename Diccionario<T,U>::iterator pos;
+        
      
    
 
@@ -118,6 +119,7 @@ Diccionario<T,U> Diccionario<T,U>::union_d(const Diccionario &D){
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::diferencia(const Diccionario &D){
+    typename Diccionario<T,U>::iterator it;
     Diccionario<T,U> res(*this);
     for(typename list<data<T,U> >::const_iterator itD = D.datos.begin(); itD != D.datos.end(); ++itD){
         res.Borrar(itD->clave); //borra de res la fichas enteras clave e info si  la clave aparece en D la borra en res, D no s epuede borarr es const
@@ -128,11 +130,13 @@ Diccionario<T,U> Diccionario<T,U>::diferencia(const Diccionario &D){
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::interseccion(const Diccionario &D){
+        typename Diccionario<T,U>::iterator it;
 
 }
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::Devolver_rango(const T &i, const T &f){
+    typename Diccionario<T,U>::iterator it;
 
 }
 
