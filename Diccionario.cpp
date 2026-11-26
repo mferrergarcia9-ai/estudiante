@@ -108,18 +108,15 @@ bool  Diccionario<T,U>::Borrar(const T & c){
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::union_d(const Diccionario &D){
-    typename Diccionario<T,U>::iterator it;
     Diccionario<T,U> res(*this); //aqui creamos una copia del diccionario para no estropear el original
-    for(typename list<data<T,U> >::const_iterator itD = D.datos.begin(); itD != D.datos.end(); ++itD){  //recorre ficha por ficha el diccionario D
-        
-     
-   
-
+    for (typename Diccionario<T,U>::iterator itD = D.begin(); itD != D.end(); itD++){
+        res.insert(*itD);
+    }
+    return res;
 }
 
 template <class T, class U>
 Diccionario<T,U> Diccionario<T,U>::diferencia(const Diccionario &D){
-    typename Diccionario<T,U>::iterator it;
     Diccionario<T,U> res(*this);
     for(typename list<data<T,U> >::const_iterator itD = D.datos.begin(); itD != D.datos.end(); ++itD){
         res.Borrar(itD->clave); //borra de res la fichas enteras clave e info si  la clave aparece en D la borra en res, D no s epuede borarr es const
@@ -129,15 +126,35 @@ Diccionario<T,U> Diccionario<T,U>::diferencia(const Diccionario &D){
 }
 
 template <class T, class U>
-Diccionario<T,U> Diccionario<T,U>::interseccion(const Diccionario &D){
+bool Diccionario<T,U> Diccionario<T,U>::interseccion(const Diccionario &D){
         typename Diccionario<T,U>::iterator it;
-
+        Diccionario<T,U> res(*this);
+        bool encontrado = false;
+        for(typename Diccionario<T,U>::const_iterator it = this.begin();it != this.end();it++){
+            if (encontrado == true){
+                encontrado = false;
+            }
+            for(typename Diccionario<T,U>::const_iterator itD = D.begin(); itD != D.end() && !encontrado; ++itD){
+               if(it->clave == itD->clave){
+                    encontrado = true;
+               }
+                
+            }
+            if (encontrado) //aqui lo que vemos es que si el elemnto es igual, lo mete en la copia res que esta vacia 
+                res.Datos.push_back(*it);
+        }
+return res;
 }
-
+            
 template <class T, class U>
-Diccionario<T,U> Diccionario<T,U>::Devolver_rango(const T &i, const T &f){
-    typename Diccionario<T,U>::iterator it;
-
+Diccionario<T,U> Diccionario<T,U>::Devolver_rango(const T &i, const T &f) const{ //metodo no modifique el diccionario
+    Diccionario<T,U> res; //empiezo con res vacio para no tener que borra la copia 
+    
+    for (typename Diccionario<T,U>::const_iterator it = begin(); it != end(); ++it) {
+        if (it->clave >= i && it->clave <= f)
+            res.Datos.push_back(*it);   // copia la clave con toda su lista
+    }
+    return res;
 }
 
 
